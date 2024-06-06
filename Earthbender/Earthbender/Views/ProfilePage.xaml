@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Earthbender.Views.ProfilePage"
+             xmlns:vm="clr-namespace:Earthbender.ViewModels"
+             Title="Profile"
+             BackgroundColor="#F9F8F6"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#01377D</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid BackgroundColor="#F9F8F6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Add the image directly in the grid -->
+        <Image Source="ProfileAvatar.png" 
+               Aspect="AspectFill"
+               VerticalOptions="Start"
+               HorizontalOptions="Fill" 
+               Grid.Row="0"/>
+
+        <StackLayout Grid.Row="1"
+                     Orientation="Vertical"
+                     Padding="20" 
+                     Spacing="10"
+                     BackgroundColor="#F9F8F6">
+            <Label Text="Earthbender" 
+                   FontSize="Title" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   Margin="0,-10,0,0"
+                   TextColor="Black"/>
+            <Label Text="User" 
+                   FontSize="16" 
+                   HorizontalOptions="Center" 
+                   Margin="0,-10,0,0"
+                   TextColor="Gray"/>
+            <ListView x:Name="lstBadges" ItemTapped="OnBadgeTapped" HasUnevenRows="True" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="5" Padding="10" Margin="0,5,0,5" HasShadow="True" BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding ImageUrl}" WidthRequest="50" HeightRequest="50"/>
+                                    <StackLayout Spacing="5" Padding="10,0,0,0">
+                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="{Binding Description}" FontSize="14" TextColor="Gray"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Reset Points and Badges" Clicked="btnReset_Clicked" 
+                    BackgroundColor="{StaticResource Accent}" 
+                    TextColor="White" 
+                    Padding="10"/>
+
+        </StackLayout>
+
+    </Grid>
+</ContentPage>
